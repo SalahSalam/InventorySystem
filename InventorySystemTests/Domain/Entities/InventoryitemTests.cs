@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lagerstyring.Domain.Entities;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lagerstyring.Domain.Entities.Tests
+namespace InventorySystem.Domain.Entities.Tests
 {
     [TestClass()]
     public class InventoryitemTests

@@ -1,6 +1,6 @@
-﻿using Applikationslag.Commands.ProductCommands;
-using Applikationslag.Interfaces;
-using Lagerstyring.Domain.Entities;
+﻿using ApplicationsLayer.Commands.ProductCommands;
+using ApplicationsLayer.Interfaces;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Applikationslag.Handlers.ProductHandler
+namespace ApplicationsLayer.Handlers.ProductHandler
 {
     public class CreateProductHandler
     {

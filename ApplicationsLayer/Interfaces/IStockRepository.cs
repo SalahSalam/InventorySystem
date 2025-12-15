@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Interfaces
+namespace ApplicationsLayer.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

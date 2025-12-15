@@ -5,7 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lagerstyring.Domain.Entities
+namespace InventorySystem.Domain.Entities
 {
     public class Inventoryitem
     {

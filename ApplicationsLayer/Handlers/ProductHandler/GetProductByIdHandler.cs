@@ -1,7 +1,7 @@
-﻿using Applikationslag.DTO;
-using Applikationslag.Interfaces;
-using Applikationslag.Queries.ProductQuery;
-using Lagerstyring.Domain.Entities;
+﻿using ApplicationsLayer.DTO;
+using ApplicationsLayer.Interfaces;
+using ApplicationsLayer.Queries.ProductQuery;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Handlers.ProductHandler
+namespace ApplicationsLayer.Handlers.ProductHandler
 {
     public class GetProductByIdHandler
     {

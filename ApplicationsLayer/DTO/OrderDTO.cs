@@ -1,11 +1,11 @@
 ﻿using System;
-using Lagerstyring.Domain.Entities;
+using InventorySystem.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.DTO
+namespace ApplicationsLayer.DTO
 {
     public class OrderDTO
     {

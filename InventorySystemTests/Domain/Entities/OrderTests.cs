@@ -1,13 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lagerstyring.Domain.Entities;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Lagerstyring.Domain.Entities.Order;
+using static InventorySystem.Domain.Entities.Order;
 
-namespace Lagerstyring.Domain.Entities.Tests
+namespace InventorySystem.Domain.Entities.Tests
 {
     [TestClass()]
     public class OrderTests

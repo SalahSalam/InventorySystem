@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Queries.ProductQuery
+namespace ApplicationsLayer.Queries.ProductQuery
 {
     public class GetAllProducts
     {
