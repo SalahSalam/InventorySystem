@@ -10,8 +10,8 @@ namespace InventorySystem.Domain.Entities
     {
         public int Productid { get; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public string Category { get; set; }
+        public string? Description { get; set; }
+        public string? Category { get; set; }
         public decimal Price { get; set; }
         public int Minimumstock { get; set; }
         public Product(int productid, string name, string description, string category, decimal price, int minimumstock)
