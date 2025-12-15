@@ -1,4 +1,4 @@
-﻿using ApplicationsLayer.Commands.ProductmovementCommands;
+﻿using ApplicationsLayer.Commands.ProductMovementCommands;
 using ApplicationsLayer.Commands.ProductCommands;
 using ApplicationsLayer.Interfaces;
 using InventorySystem.Domain.Entities;

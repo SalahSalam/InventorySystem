@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.Queries.ProductmovementQuery
+namespace ApplicationsLayer.Queries.ProductMovementQuery
 {
     public class GetProductMovementById
     {
