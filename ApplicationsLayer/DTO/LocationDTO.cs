@@ -9,7 +9,7 @@ namespace ApplicationsLayer.DTO
     public class LocationDTO
     {
         public int LocationID { get; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
     }
 }
