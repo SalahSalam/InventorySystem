@@ -1,14 +1,14 @@
-﻿using Applikationslag.DTO;
-using Applikationslag.Interfaces;
-using Applikationslag.Queries.OrderQuery;
-using Lagerstyring.Domain.Entities;
+﻿using ApplicationsLayer.DTO;
+using ApplicationsLayer.Interfaces;
+using ApplicationsLayer.Queries.OrderQuery;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Handlers.OrderHandler
+namespace ApplicationsLayer.Handlers.OrderHandler
 {
     public class GetOrderByIdHandler
     {

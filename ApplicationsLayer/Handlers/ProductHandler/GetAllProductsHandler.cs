@@ -1,14 +1,14 @@
-﻿using Applikationslag.DTO;
-using Applikationslag.Interfaces;
-using Lagerstyring.Domain.Entities;
+﻿using ApplicationsLayer.DTO;
+using ApplicationsLayer.Interfaces;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Applikationslag.Queries.ProductQuery.GetAllProducts;
+using static ApplicationsLayer.Queries.ProductQuery.GetAllProducts;
 
-namespace Applikationslag.Handlers.ProductHandler
+namespace ApplicationsLayer.Handlers.ProductHandler
 {
     public class GetAllProductsHandler
     {

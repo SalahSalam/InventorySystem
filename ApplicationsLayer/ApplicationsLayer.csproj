@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InventorySystem\InventorySystem.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="InventorySystem">
+      <HintPath>..\InventorySystem\bin\Debug\net8.0\InventorySystem.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

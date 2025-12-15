@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.DTO
+namespace ApplicationsLayer.DTO
 {
     public class OrderLineDTO
     {

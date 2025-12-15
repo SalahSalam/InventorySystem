@@ -1,13 +1,13 @@
-﻿using Applikationslag.Commands.OrderCommands;
-using Applikationslag.Interfaces;
-using Lagerstyring.Domain.Entities;
+﻿using ApplicationsLayer.Commands.OrderCommands;
+using ApplicationsLayer.Interfaces;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Handlers.OrderHandler
+namespace ApplicationsLayer.Handlers.OrderHandler
 {
     public class DeleteOrderHandler
     {

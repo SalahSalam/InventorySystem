@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lagerstyring.Domain.Entities
+namespace InventorySystem.Domain.Entities
 {
-    public class Productmovement
+    public class ProductMovement
     {
         public int Movementid { get; }
         public int Productid { get; }
@@ -14,7 +14,7 @@ namespace Lagerstyring.Domain.Entities
         public int Quantity { get; set; }
         public Movementtype Type { get; set; }
         public DateTime Timestamp { get; set; }
-        public Productmovement(int productid, int userid, int quantity, Movementtype type, DateTime timestamp)
+        public ProductMovement(int productid, int userid, int quantity, Movementtype type, DateTime timestamp)
         {
             Productid = productid;
             Userid = userid;

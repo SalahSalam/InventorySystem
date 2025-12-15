@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lagerstyring.Domain.Entities;
+using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel.DataAnnotations;
 
-namespace Lagerstyring.Domain.Entities.Tests
+namespace InventorySystem.Domain.Entities.Tests
 {
     [TestClass()]
     public class ProductTests

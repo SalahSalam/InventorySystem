@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Applikationslag.Commands.ProductCommands
+namespace ApplicationsLayer.Commands.ProductCommands
 {
     public class DeleteProduct
     {

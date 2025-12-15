@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.Queries.OrderQuery
+namespace ApplicationsLayer.Queries.ProductmovementQuery
 {
-    public class GetAllOrders { }
+    public class GetAllProductMovements{ }
 }
