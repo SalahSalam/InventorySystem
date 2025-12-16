@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Handlers.ProductMovementHandler
 {
-    internal class DeleteProductMovementHandler
+    public class DeleteProductMovementHandler
     {
         private readonly IGenericRepository<ProductMovement> _repo;
 

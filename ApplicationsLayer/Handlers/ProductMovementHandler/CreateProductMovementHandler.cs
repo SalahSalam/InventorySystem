@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Handlers.ProductMovementHandler
 {
-    internal class CreateProductMovementHandler
+    public class CreateProductMovementHandler
     {
         private readonly IGenericRepository<ProductMovement> _repo;
         public CreateProductMovementHandler(IGenericRepository<ProductMovement> repo)
