@@ -8,7 +8,9 @@ namespace ApplicationsLayer.Commands.OrderCommands
 {
     public class UpdateOrder
     {
-        public int OrderId { get; }
-        public string? NewStatus { get; set; }
+        public int OrderID { get; set; } // Identifier for the order to update
+        public DateTime OrderDate { get; set; }
+        public int CustomerID { get; set; }
+        public string Status { get; set; }
     }
 }
