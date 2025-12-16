@@ -1,6 +1,6 @@
 ﻿using ApplicationsLayer.DTO;
 using ApplicationsLayer.Interfaces;
-using ApplicationsLayer.Queries.ProductmovementQuery;
+using ApplicationsLayer.Queries.ProductMovementQuery;
 using InventorySystem.Domain.Entities;
 using System;
 using System.Collections.Generic;

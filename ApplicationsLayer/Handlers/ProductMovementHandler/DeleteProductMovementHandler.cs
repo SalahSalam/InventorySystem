@@ -1,4 +1,4 @@
-﻿using ApplicationsLayer.Commands.ProductmovementCommands;
+﻿using ApplicationsLayer.Commands.ProductMovementCommands;
 using ApplicationsLayer.Commands.ProductCommands;
 using ApplicationsLayer.Interfaces;
 using InventorySystem.Domain.Entities;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Handlers.ProductMovementHandler
 {
-    internal class DeleteProductMovementHandler
+    public class DeleteProductMovementHandler
     {
         private readonly IGenericRepository<ProductMovement> _repo;
 

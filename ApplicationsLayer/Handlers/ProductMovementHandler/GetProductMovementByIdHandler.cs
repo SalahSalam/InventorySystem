@@ -1,6 +1,6 @@
 ﻿using ApplicationsLayer.DTO;
 using ApplicationsLayer.Interfaces;
-using ApplicationsLayer.Queries.ProductmovementQuery;
+using ApplicationsLayer.Queries.ProductMovementQuery;
 using ApplicationsLayer.Queries.ProductQuery;
 using InventorySystem.Domain.Entities;
 using System;
@@ -20,14 +20,19 @@ namespace ApplicationsLayer.Handlers.ProductMovementHandler
         }
         public async Task<ProductMovementDTO> Handle(GetProductMovementById query)
         {
-            var produc = await _repo.GetByIdAsync(query.Movementid);
+            var productMovement = await _repo.GetByIdAsync(query.Movementid);
 
             //if (product == null)
             //throw new NotFoundException(nameof(Product), query.Productid);
 
             return new ProductMovementDTO
             {
-                
+                Movementid = productMovement.Movementid,
+                Productid = productMovement.Productid,
+                Userid = productMovement.Userid,
+                Quantity = productMovement.Quantity,
+                Type = productMovement.Type,
+                Timestamp = productMovement.Timestamp
             };
 
         }

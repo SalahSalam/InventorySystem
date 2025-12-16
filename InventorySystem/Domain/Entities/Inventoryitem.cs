@@ -16,7 +16,7 @@ namespace InventorySystem.Domain.Entities
         public DateTime LastUpdated { get; set; }
         public int ExpectedQuantity { get; }
 
-        public Inventoryitem(int inventoryItemID, int productID, int locationID, int quantity, DateTime lastupdated)
+        public Inventoryitem(int inventoryItemID, int productID, int locationID, int quantity, DateTime lastupdated, int expectedQuantity)
         {
             InventoryItemID = inventoryItemID;
             ProductID = productID;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.Commands.ProductmovementCommands
+namespace ApplicationsLayer.Commands.ProductMovementCommands
 {
     public class UpdateProductMovement
     {

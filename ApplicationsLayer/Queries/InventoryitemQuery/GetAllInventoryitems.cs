@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.Queries.ProductMovementQuery
+namespace ApplicationsLayer.Queries.InventoryitemQuery
 {
-    public class GetAllProductMovements{ }
+    public  class GetAllInventoryitems{}
 }
