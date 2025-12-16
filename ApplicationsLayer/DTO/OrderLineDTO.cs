@@ -8,9 +8,10 @@ namespace ApplicationsLayer.DTO
 {
     public class OrderLineDTO
     {
-        public int OrderLineID { get; }
+        public int OrderLineId { get; set; }
+        public int OrderId { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; } = "";
         public int Quantity { get; set; }
-        public int OrderID { get; }
-        public int ProductID { get; }
     }
 }

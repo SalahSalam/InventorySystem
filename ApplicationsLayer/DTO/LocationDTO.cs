@@ -8,8 +8,8 @@ namespace ApplicationsLayer.DTO
 {
     public class LocationDTO
     {
-        public int LocationID { get; }
-        public string? Name { get; set; }
+        public int LocationID { get; set; }
+        public string Name { get; set; } = "";
         public string? Description { get; set; }
     }
 }

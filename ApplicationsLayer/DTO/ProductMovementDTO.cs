@@ -11,7 +11,11 @@ namespace ApplicationsLayer.DTO
     {
         public int Movementid { get;  set; }
         public int Productid { get; set; }
+        public string ProductName { get; set; } = "";
+        public int? FromLocationId { get; set; }
+        public int? ToLocationId { get; set; }
         public int Userid { get; set; }
+        public string UserName { get; set; } = "";
         public int Quantity { get; set; }
         public Movementtype Type { get; set; }
         public DateTime Timestamp { get; set; }
