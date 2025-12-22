@@ -12,9 +12,8 @@ namespace InventorySystem.Domain.Entities
         public int InventoryItemId { get; }
         public int ProductId { get; }
         public int LocationId { get; }
-        public int Quantity { get; set; }
-        public DateTime LastUpdated { get; set; }
-        public int ExpectedQuantity { get; }
+        public int Quantity { get; private set; }
+        public DateTime LastUpdated { get; private set; }
 
         public InventoryItem(int inventoryItemId, int productId, int locationId, int quantity, DateTime lastupdated, int expectedQuantity)
         {
@@ -27,11 +26,6 @@ namespace InventorySystem.Domain.Entities
             {
                 throw new ArgumentException("Quantity cannot be negative.");
             }
-        }
-
-        public InventoryItem(int expectedQuantity)
-        {
-            ExpectedQuantity = expectedQuantity;
         }
 
         public void UpdateQuantity(int value)

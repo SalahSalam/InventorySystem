@@ -24,10 +24,10 @@ namespace InventorySystem.Domain.Entities
             _quantity = quantity;
         }
 
-        // orderId is set internally
-        internal void SetOrderId(int orderId)
-        {
-            _orderId = orderId;
-        }
+        //// orderId is set internally
+        //internal void SetOrderId(int orderId)
+        //{
+        //    _orderId = orderId;
+        //}
     }
 }
