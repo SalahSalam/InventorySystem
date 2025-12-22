@@ -1,37 +1,38 @@
 ﻿using ApplicationsLayer.DTO;
 using ApplicationsLayer.Interfaces;
 using InventorySystem.Domain.Entities;
+using ApplicationsLayer.Queries.ProductQuery;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ApplicationsLayer.Queries.ProductQuery.GetAllProducts;
 
 namespace ApplicationsLayer.Handlers.ProductHandler
 {
     public class GetAllProductsHandler
     {
-        private readonly IGenericRepository<Product> _repo;
+        private readonly IGenericRepository<Product> _productRepo;
 
-        public GetAllProductsHandler(IGenericRepository<Product> repo)
+        public GetAllProductsHandler(IGenericRepository<Product> productRepo)
         {
-            _repo = repo;
+            _productRepo = productRepo;
         }
 
-        public async Task<List<ProductDTO>> Handle(GetAllProductsQuery query)
+        public async Task<List<ProductDTO>> Handle(GetAllProducts query)
         {
-            var products = await _repo.GetAllAsync();
+            var products = await _productRepo.GetAllAsync();
 
             return products.Select(p => new ProductDTO
             {
-                Productid = p.Productid,
+                ProductId = p.ProductId,
                 Name = p.Name,
                 Description = p.Description,
-                Category = p.Category,
+                Category = p.Category ?? "",
                 Price = p.Price,
                 Minimumstock = p.Minimumstock
             }).ToList();
         }
     }
+
 }

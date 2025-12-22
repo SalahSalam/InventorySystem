@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Queries.InventoryitemQuery
 {
-    public class GetInventoryitemById
+    public class GetInventoryForProduct
     {
-        public int InventoryItemID { get; init; }
+        public int ProductId { get; init; }
     }
 }

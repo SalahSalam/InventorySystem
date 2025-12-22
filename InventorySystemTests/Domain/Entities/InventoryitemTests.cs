@@ -16,11 +16,11 @@ namespace InventorySystem.Domain.Entities.Tests
         public void Constructor_ShouldInitializeValues_WhenValidInput()
         {
             var date = DateTime.Now;
-            var item = new Inventoryitem(1, 10, 5, 20, date);
+            var item = new InventoryItem(1, 10, 5, 20, date);
 
-            Assert.AreEqual(1, item.InventoryItemID);
-            Assert.AreEqual(10, item.ProductID);
-            Assert.AreEqual(5, item.LocationID);
+            Assert.AreEqual(1, item.InventoryItemId);
+            Assert.AreEqual(10, item.ProductId);
+            Assert.AreEqual(5, item.LocationId);
             Assert.AreEqual(20, item.Quantity);
             Assert.AreEqual(date, item.LastUpdated);
         }
@@ -35,7 +35,7 @@ namespace InventorySystem.Domain.Entities.Tests
                 int expectedQuantity = 0;
 
                 // Act
-                Inventoryitem item = new Inventoryitem(expectedQuantity);
+                InventoryItem item = new InventoryItem(expectedQuantity);
 
                 // Assert
                 Assert.AreEqual(expectedQuantity, item.Quantity);
@@ -50,7 +50,7 @@ namespace InventorySystem.Domain.Entities.Tests
             int expectedQuantity = 0;
 
             // Act
-            Inventoryitem item = new Inventoryitem(expectedQuantity);
+            InventoryItem item = new InventoryItem(expectedQuantity);
 
             // Assert
             Assert.AreEqual(expectedQuantity, item.Quantity);
@@ -66,7 +66,7 @@ namespace InventorySystem.Domain.Entities.Tests
                 int actualQuantity = -1;
 
                 // Act
-                Inventoryitem item = new Inventoryitem(expectedQuantity);
+                InventoryItem item = new InventoryItem(expectedQuantity);
 
                 // Assert
                 Assert.AreEqual(expectedQuantity, item.Quantity);
@@ -79,7 +79,7 @@ namespace InventorySystem.Domain.Entities.Tests
         public void UpdateQuantity_NegativeValue_ThrowsException()
         {
             // Arrange
-            Inventoryitem item = new Inventoryitem(0);
+            InventoryItem item = new InventoryItem(0);
 
             // Act & Assert
             Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(-1));
@@ -92,7 +92,7 @@ namespace InventorySystem.Domain.Entities.Tests
             // Arrange
             int initialQuantity = 0;
             int updatedQuantity = 5;
-            Inventoryitem item = new Inventoryitem(initialQuantity);
+            InventoryItem item = new InventoryItem(initialQuantity);
 
             // Act
             item.UpdateQuantity(updatedQuantity);
@@ -108,7 +108,7 @@ namespace InventorySystem.Domain.Entities.Tests
             // Arrange
             int initialQuantity = -1;
             int updatedQuantity = -1;
-            Inventoryitem item = new Inventoryitem(initialQuantity);
+            InventoryItem item = new InventoryItem(initialQuantity);
 
             // Act & Assert
             Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(updatedQuantity));

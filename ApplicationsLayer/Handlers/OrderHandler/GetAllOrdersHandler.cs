@@ -24,7 +24,7 @@ namespace ApplicationsLayer.Handlers.OrderHandler
             var orders = await _repo.GetAllAsync();
             return orders.Select(o => new OrderDTO
             {
-                OrderID = o.OrderID,
+                OrderId = o.OrderId,
                 CreatedAt = o.CreatedAt
             }).ToList();
         }

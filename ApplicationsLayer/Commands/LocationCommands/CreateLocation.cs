@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.DTO
+namespace ApplicationsLayer.Commands.LocationCommands
 {
-    public class LocationDTO
+    public class CreateLocation
     {
-        public int LocationId { get; set; }
         public string Name { get; set; } = "";
         public string? Description { get; set; }
     }

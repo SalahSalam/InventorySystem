@@ -6,17 +6,28 @@ using System.Threading.Tasks;
 
 namespace InventorySystem.Domain.Entities
 {
-    public class Orderline
+    public class OrderLine
     {
-        public int OrderLineID { get; }
-        public int OrderID { get; }
-        public int ProductID { get; }
-        public int Quantity { get; set; }
-        public Orderline(int orderID, int productID, int quantity)
+        private int _orderId; // set by Order / ORM
+        private int _productId;
+        private int _quantity;
+
+        public int ProductId => _productId;
+        public int Quantity => _quantity;
+
+        public OrderLine(int productId, int quantity)
         {
-            OrderID = orderID;
-            ProductID = productID;
-            Quantity = quantity;
+            if (quantity <= 0)
+                throw new ArgumentException("Quantity must be greater than zero.");
+
+            _productId = productId;
+            _quantity = quantity;
+        }
+
+        // orderId is set internally
+        internal void SetOrderId(int orderId)
+        {
+            _orderId = orderId;
         }
     }
 }

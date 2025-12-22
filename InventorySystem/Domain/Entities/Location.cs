@@ -8,11 +8,15 @@ namespace InventorySystem.Domain.Entities
 {
     public class Location
     {
-        public int LocationID { get; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Location(string name, string description)
+        public int LocationId { get; }
+        public string Name { get; private set; }
+        public string? Description { get; private set; }
+
+        public Location(string name, string? description)
         {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(name);
+
             Name = name;
             Description = description;
         }

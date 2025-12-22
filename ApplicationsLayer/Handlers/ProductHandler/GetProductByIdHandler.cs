@@ -13,28 +13,29 @@ namespace ApplicationsLayer.Handlers.ProductHandler
 {
     public class GetProductByIdHandler
     {
-        private readonly IGenericRepository<Product> _repo;
-        public GetProductByIdHandler(IGenericRepository<Product> repo)
+        private readonly IGenericRepository<Product> _productRepo;
+
+        public GetProductByIdHandler(IGenericRepository<Product> productRepo)
         {
-            _repo = repo;
+            _productRepo = productRepo;
         }
+
         public async Task<ProductDTO> Handle(GetProductById query)
         {
-            var product = await _repo.GetByIdAsync(query.Productid);
-
-            //if (product == null)
-            //throw new NotFoundException(nameof(Product), query.Productid);
+            var product = await _productRepo.GetByIdAsync(query.ProductId)
+                ?? throw new Exception($"Product {query.ProductId} not found");
 
             return new ProductDTO
             {
-                Productid = product.Productid,
+                ProductId = product.ProductId,
                 Name = product.Name,
                 Description = product.Description,
-                Category = product.Category,
+                Category = product.Category ?? "",
                 Price = product.Price,
                 Minimumstock = product.Minimumstock
             };
         }
     }
+
 }
 
