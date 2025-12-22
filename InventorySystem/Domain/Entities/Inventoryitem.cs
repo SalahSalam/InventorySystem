@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace InventorySystem.Domain.Entities
 {
-    public class Inventoryitem
+    public class InventoryItem
     {
-        public int InventoryItemID { get; }
-        public int ProductID { get; }
-        public int LocationID { get; }
+        public int InventoryItemId { get; }
+        public int ProductId { get; }
+        public int LocationId { get; }
         public int Quantity { get; set; }
         public DateTime LastUpdated { get; set; }
         public int ExpectedQuantity { get; }
 
-        public Inventoryitem(int inventoryItemID, int productID, int locationID, int quantity, DateTime lastupdated, int expectedQuantity)
+        public InventoryItem(int inventoryItemId, int productId, int locationId, int quantity, DateTime lastupdated, int expectedQuantity)
         {
-            InventoryItemID = inventoryItemID;
-            ProductID = productID;
-            LocationID = locationID;
+            InventoryItemId = inventoryItemId;
+            ProductId = productId;
+            LocationId = locationId;
             Quantity = quantity;
             LastUpdated = lastupdated;
             if (quantity < 0)
@@ -29,7 +29,7 @@ namespace InventorySystem.Domain.Entities
             }
         }
 
-        public Inventoryitem(int expectedQuantity)
+        public InventoryItem(int expectedQuantity)
         {
             ExpectedQuantity = expectedQuantity;
         }

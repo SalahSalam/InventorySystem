@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Queries.OrderQuery
 {
-    public class GetAllOrders { }
+    public class GetAllOrders
+    {
+        public int OrderId { get; set; }
+    }
 }

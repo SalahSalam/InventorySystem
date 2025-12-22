@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationsLayer.Queries.InventoryitemQuery
+namespace ApplicationsLayer.Queries.ProductQuery
 {
-    public  class GetAllInventoryitems{}
+    public class GetProductsBelowMinimumStock { }   //slet
 }

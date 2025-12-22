@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Commands.ProductCommands
 {
-    public class DeleteProduct
+    public class UpdateProductMinimumStockCommand
     {
-        public int ProductId { get; }
+        public int ProductId { get; set; }
+        public int Minimumstock { get; set; }
     }
+
 }

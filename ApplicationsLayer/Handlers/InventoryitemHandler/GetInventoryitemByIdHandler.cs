@@ -11,28 +11,39 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Handlers.InventoryitemHandler
 {
-    public class GetInventoryitemByIdHandler
+    public class GetInventoryItemByIdHandler
     {
-        private readonly IGenericRepository<Inventoryitem> _repo;
-        public GetInventoryitemByIdHandler(IGenericRepository<Inventoryitem> repo)
-        {
-            _repo = repo;
-        }
-        public async Task<InventoryItemDTO> Handle(GetInventoryitemById query)
-        {
-            var inventoryitem = await _repo.GetByIdAsync(query.InventoryItemID);
+        private readonly IGenericRepository<InventoryItem> _inventoryRepo;
+        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<Location> _locationRepo;
 
-            if (inventoryitem == null)
-                return null; // or throw an exception, depending on your design
+        public GetInventoryItemByIdHandler(
+            IGenericRepository<InventoryItem> inventoryRepo,
+            IGenericRepository<Product> productRepo,
+            IGenericRepository<Location> locationRepo)
+        {
+            _inventoryRepo = inventoryRepo;
+            _productRepo = productRepo;
+            _locationRepo = locationRepo;
+        }
+
+        public async Task<InventoryItemDTO> Handle(int inventoryItemId)
+        {
+            var item = await _inventoryRepo.GetByIdAsync(inventoryItemId)
+                ?? throw new Exception("Inventory item not found.");
+
+            var product = await _productRepo.GetByIdAsync(item.ProductId);
+            var location = await _locationRepo.GetByIdAsync(item.LocationId);
 
             return new InventoryItemDTO
             {
-                InventoryItemID = inventoryitem.InventoryItemID,
-                ProductID = inventoryitem.ProductID,
-                LocationID = inventoryitem.LocationID,
-                Quantity = inventoryitem.Quantity,
-                ExpectedQuantity = inventoryitem.ExpectedQuantity,
-                LastUpdated = inventoryitem.LastUpdated
+                InventoryItemId = item.InventoryItemId,
+                ProductId = item.ProductId,
+                ProductName = product!.Name,
+                LocationId = item.LocationId,
+                LocationName = location!.Name,
+                Quantity = item.Quantity,
+                LastUpdated = item.LastUpdated
             };
         }
     }

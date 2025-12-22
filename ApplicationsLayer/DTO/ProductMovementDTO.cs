@@ -17,7 +17,7 @@ namespace ApplicationsLayer.DTO
         public int Userid { get; set; }
         public string UserName { get; set; } = "";
         public int Quantity { get; set; }
-        public Movementtype Type { get; set; }
+        public MovementType Type { get; set; }
         public DateTime Timestamp { get; set; }
     }
 }

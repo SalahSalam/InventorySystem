@@ -8,10 +8,10 @@ namespace ApplicationsLayer.DTO
 {
     public class InventoryItemDTO
     {
-        public int InventoryItemID { get; set; }
-        public int ProductID { get; set; }
+        public int InventoryItemId { get; set; }
+        public int ProductId { get; set; }
         public string ProductName { get; set; } = "";
-        public int LocationID { get; set; }
+        public int LocationId { get; set; }
         public string LocationName { get; set; } = "";
         public int Quantity { get; set; }
         public DateTime LastUpdated { get; set; }

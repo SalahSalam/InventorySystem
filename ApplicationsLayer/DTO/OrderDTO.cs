@@ -14,6 +14,6 @@ namespace ApplicationsLayer.DTO
         public string? ExternalReference { get; set; } //eg. supplier-order nr.
         public DateTime CreatedAt { get; set; }
         public OrderStatus Status { get; set; }
-        public List<OrderLineDTO> Items { get; set; } = new();
+        public List<OrderLineDTO> Lines { get; set; } = new();
     }
 }

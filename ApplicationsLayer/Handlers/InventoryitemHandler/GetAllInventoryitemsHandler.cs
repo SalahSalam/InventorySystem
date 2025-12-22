@@ -11,26 +11,36 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Handlers.InventoryitemHandler
 {
-    internal class GetAllInventoryitemsHandler
+    public class GetAllInventoryItemsHandler
     {
-        private readonly IGenericRepository<Inventoryitem> _repo;
+        private readonly IGenericRepository<InventoryItem> _inventoryRepo;
+        private readonly IGenericRepository<Product> _productRepo;
+        private readonly IGenericRepository<Location> _locationRepo;
 
-        public GetAllInventoryitemsHandler(IGenericRepository<Inventoryitem> repo)
+        public GetAllInventoryItemsHandler(
+            IGenericRepository<InventoryItem> inventoryRepo,
+            IGenericRepository<Product> productRepo,
+            IGenericRepository<Location> locationRepo)
         {
-            _repo = repo;
+            _inventoryRepo = inventoryRepo;
+            _productRepo = productRepo;
+            _locationRepo = locationRepo;
         }
 
-        public async Task<List<InventoryItemDTO>> Handle(GetAllInventoryitems query)
+        public async Task<List<InventoryItemDTO>> Handle()
         {
-            var inventoryitems = await _repo.GetAllAsync();
+            var items = await _inventoryRepo.GetAllAsync();
+            var products = await _productRepo.GetAllAsync();
+            var locations = await _locationRepo.GetAllAsync();
 
-            return inventoryitems.Select(i => new InventoryItemDTO
+            return items.Select(i => new InventoryItemDTO
             {
-                InventoryItemID = i.InventoryItemID,
-                ProductID = i.ProductID,
-                LocationID = i.LocationID,
+                InventoryItemId = i.InventoryItemId,
+                ProductId = i.ProductId,
+                ProductName = products.First(p => p.ProductId == i.ProductId).Name,
+                LocationId = i.LocationId,
+                LocationName = locations.First(l => l.LocationId == i.LocationId).Name,
                 Quantity = i.Quantity,
-                ExpectedQuantity = i.ExpectedQuantity,
                 LastUpdated = i.LastUpdated
             }).ToList();
         }

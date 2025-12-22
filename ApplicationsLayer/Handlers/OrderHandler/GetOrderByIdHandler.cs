@@ -27,7 +27,7 @@ namespace ApplicationsLayer.Handlers.OrderHandler
 
             return new OrderDTO
             {
-                OrderID = o.OrderID,
+                OrderId = o.OrderId,
                 CreatedAt = o.CreatedAt
             };
         }

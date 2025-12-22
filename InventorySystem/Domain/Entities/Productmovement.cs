@@ -8,21 +8,25 @@ namespace InventorySystem.Domain.Entities
 {
     public class ProductMovement
     {
-        public int Movementid { get; }
-        public int Productid { get; }
-        public int Userid { get; }
+        public int MovementId { get; }
+        public int ProductId { get; }
+        public int UserId { get; }
+        public int? FromLocationId { get; }
+        public int? ToLocationId { get; }
         public int Quantity { get; set; }
-        public Movementtype Type { get; set; }
+        public MovementType Type { get; set; }
         public DateTime Timestamp { get; set; }
-        public ProductMovement(int productid, int userid, int quantity, Movementtype type, DateTime timestamp)
+        public ProductMovement(int productId, int userId, int? fromLocationId, int? toLocationId, int quantity, MovementType type, DateTime timestamp)
         {
-            Productid = productid;
-            Userid = userid;
+            ProductId = productId;
+            UserId = userId;
+            FromLocationId = fromLocationId;
+            ToLocationId = toLocationId;
             Quantity = quantity;
             Type = type;
             Timestamp = timestamp;
         }
-        public enum Movementtype
+        public enum MovementType
         {
             In,
             Out,
