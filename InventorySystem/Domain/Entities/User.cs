@@ -9,7 +9,7 @@ namespace InventorySystem.Domain.Entities
 {
     public class User
     {
-        public int Id { get; }
+        public int UserId { get; }
         public string Name { get; set; }
         public string Role { get; set; }
         public User(string name, string role)

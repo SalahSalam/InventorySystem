@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Queries.ProductQuery
 {
-    public class GetAllProducts
-    {
-        public class GetAllProductsQuery { }
-    }
+    public class GetAllProducts { }
 }

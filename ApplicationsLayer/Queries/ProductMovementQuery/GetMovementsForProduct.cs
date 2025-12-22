@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Queries.ProductMovementQuery
 {
-    public class GetProductMovementById
+    public class GetMovementsForProduct
     {
-        public int Movementid { get; }
-        public int Productid { get; }
+        public int ProductId { get; }
     }
 }

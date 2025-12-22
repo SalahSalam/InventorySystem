@@ -8,12 +8,11 @@ namespace ApplicationsLayer.Commands.OrderCommands
 {
     public class CreateOrder
     {
-        public int OrderId { get; }
-        public List<CreateOrderItem> Items { get; set; } = new();
+        public List<CreateOrderLine> Lines { get; set; } = new();
     }
-    public class CreateOrderItem
+    public class CreateOrderLine
     {
-        public int ItemId { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
     }
 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationsLayer.Commands.OrderCommands
 {
-    public class DeleteOrder
+    public class CloseOrder
     {
-        public int OrderId { get; }
+        public int OrderId { get; set; }
     }
+
 }

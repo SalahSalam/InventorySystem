@@ -8,30 +8,34 @@ namespace InventorySystem.Domain.Entities
 {
     public class Order
     {
-        public readonly List<Orderline> _orderlines = new List<Orderline>();
-        public int OrderID { get; }
-        public DateTime CreatedAt { get; set; }
-        public OrderStatus Status { get; set; }
+        private readonly List<OrderLine> _lines = new();   //private to enforce composition
+
+        public int OrderId { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public OrderStatus Status { get; private set; }
+        public IReadOnlyCollection<OrderLine> Lines => _lines.AsReadOnly();
+
+
+        public Order(IEnumerable<(int productId, int quantity)> lines)
+        {
+            if (!lines.Any())
+                throw new ArgumentException("An order must contain at least one order line.");
+
+            CreatedAt = DateTime.UtcNow;
+            Status = OrderStatus.Open;
+
+            foreach (var (productId, quantity) in lines)
+            {
+                _lines.Add(new OrderLine(productId, quantity));
+            }
+        }
+
 
         public enum OrderStatus
         {
             Open,
             Closed,
             Sent
-        }
-
-        public Order()
-        {
-            CreatedAt = DateTime.Now;
-            Status = OrderStatus.Open;
-        }
-        public void Addorderline(int ProductID, int Quantity)
-        {
-            if (Quantity <= 0)
-            {
-                throw new ArgumentException("Quantity must be positive");
-            }
-            _orderlines.Add(new Orderline(OrderID, ProductID, Quantity));
         }
         public void CloseOrder()
         {

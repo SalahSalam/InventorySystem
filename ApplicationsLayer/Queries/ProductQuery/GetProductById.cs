@@ -8,6 +8,6 @@ namespace ApplicationsLayer.Queries.ProductQuery
 {
     public class GetProductById
     {
-        public int Productid { get; set; }
+        public int ProductId { get; set; }
     }
 }
