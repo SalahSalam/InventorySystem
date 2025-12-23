@@ -16,6 +16,7 @@ namespace InventorySystem.Domain.Entities
         public int Quantity { get; set; }
         public MovementType Type { get; set; }
         public DateTime Timestamp { get; set; }
+
         public ProductMovement(int productId, int userId, int? fromLocationId, int? toLocationId, int quantity, MovementType type, DateTime timestamp)
         {
             ProductId = productId;
