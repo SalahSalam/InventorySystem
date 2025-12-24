@@ -1,0 +1,26 @@
+﻿using InventorySystem.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InfrastructureLayer.Persistence.Configurations
+{
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
+    {
+        public void Configure(EntityTypeBuilder<Location> builder)
+        {
+            builder.HasKey(l => l.LocationId);
+
+            builder.Property(l => l.Name)
+                   .IsRequired()
+                   .HasMaxLength(100);
+
+            builder.Property(l => l.Description)
+                   .HasMaxLength(255);
+        }
+    }
+}

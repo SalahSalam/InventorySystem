@@ -8,7 +8,7 @@ namespace InventorySystem.Domain.Entities
 {
     public class OrderLine
     {
-        private int _orderId; // set by Order / ORM
+        //private int _orderId; // set by Order / ORM
         private int _productId;
         private int _quantity;
 
