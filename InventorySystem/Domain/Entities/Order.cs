@@ -29,8 +29,6 @@ namespace InventorySystem.Domain.Entities
                 _lines.Add(new OrderLine(productId, quantity));
             }
         }
-
-
         public enum OrderStatus
         {
             Open,

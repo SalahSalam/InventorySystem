@@ -8,7 +8,7 @@ namespace InventorySystem.Domain.Entities
 {
     public class OrderLine
     {
-        private int _orderId; // set by Order / ORM
+        //private int _orderId; // set by Order / ORM
         private int _productId;
         private int _quantity;
 
@@ -24,10 +24,10 @@ namespace InventorySystem.Domain.Entities
             _quantity = quantity;
         }
 
-        // orderId is set internally
-        internal void SetOrderId(int orderId)
-        {
-            _orderId = orderId;
-        }
+        //// orderId is set internally
+        //internal void SetOrderId(int orderId)
+        //{
+        //    _orderId = orderId;
+        //}
     }
 }

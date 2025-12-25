@@ -1,5 +1,4 @@
 ﻿using ApplicationsLayer.Commands.Inventoryitem;
-using ApplicationsLayer.Commands.ProductMovementCommands;
 using ApplicationsLayer.Exeptions;
 using ApplicationsLayer.Interfaces;
 using InventorySystem.Domain.Entities;
