@@ -43,5 +43,13 @@ namespace InventorySystem.Domain.Entities
             }
             Status = OrderStatus.Closed;
         }
+        public void AddOrderLine(int productId, int quantity)
+        {
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be greater than zero.");
+            }
+            _lines.Add(new OrderLine(productId, quantity));
+        }
     }
 }

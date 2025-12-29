@@ -15,62 +15,60 @@ namespace InventorySystem.Domain.Entities.Tests
         // Verifies that the constructor initializes all properties correctly with valid input.
         public void Constructor_ShouldInitializeValues_WhenValidInput()
         {
-            var date = DateTime.Now;
-            var item = new InventoryItem(1, 10, 5, 20, date);
-
-            Assert.AreEqual(1, item.InventoryItemId);
-            Assert.AreEqual(10, item.ProductId);
-            Assert.AreEqual(5, item.LocationId);
-            Assert.AreEqual(20, item.Quantity);
-            Assert.AreEqual(date, item.LastUpdated);
-        }
-
-
-        [TestMethod()]
-        // Checks that the constructor sets the quantity property correctly when initialized with a single parameter.
-        public void InventoryitemTest_Correct()
-        {
-            {
-                // Arrange
-                int expectedQuantity = 0;
-
-                // Act
-                InventoryItem item = new InventoryItem(expectedQuantity);
-
-                // Assert
-                Assert.AreEqual(expectedQuantity, item.Quantity);
-            }
-        }
-
-        [TestMethod]
-        // Checks that the constructor sets the quantity property correctly when initialized with a single parameter.
-        public void Constructor_ShouldSetQuantity_WhenSingleParameter()
-        {
             // Arrange
-            int expectedQuantity = 0;
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
+            int quantity = 20;
+            DateTime lastUpdated = DateTime.Now;
 
             // Act
-            InventoryItem item = new InventoryItem(expectedQuantity);
+            var item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated, 0); // 0 for expectedQuantity
 
             // Assert
-            Assert.AreEqual(expectedQuantity, item.Quantity);
+            Assert.AreEqual(inventoryItemId, item.InventoryItemId);
+            Assert.AreEqual(productId, item.ProductId);
+            Assert.AreEqual(locationId, item.LocationId);
+            Assert.AreEqual(quantity, item.Quantity);
+            Assert.AreEqual(lastUpdated, item.LastUpdated);
+        }
+
+            [TestMethod]
+        // Checks that the constructor sets the quantity property correctly when initialized with a single parameter.
+        // Checks that the constructor sets the quantity property correctly when initialized with all required parameters.
+        public void Constructor_ShouldSetQuantity_WhenAllParametersProvided()
+        {
+            // Arrange
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
+            int quantity = 0;
+            DateTime lastUpdated = DateTime.Now;
+
+            // Act
+            InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated, 0);
+
+            // Assert
+            Assert.AreEqual(quantity, item.Quantity);
         }
 
         [TestMethod()]
         // Verifies that the constructor sets the quantity property to the expected value.
         public void InventoryitemTest_Notcorrect()
         {
-            {
-                // Arrange
-                int expectedQuantity = 0;
-                int actualQuantity = -1;
+            // Arrange
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
+            int quantity = 0;
+            DateTime lastUpdated = DateTime.Now;
+            int expectedQuantity = 0;
 
-                // Act
-                InventoryItem item = new InventoryItem(expectedQuantity);
+            // Act
+            InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated, expectedQuantity);
 
-                // Assert
-                Assert.AreEqual(expectedQuantity, item.Quantity);
-            }
+            // Assert
+            Assert.AreEqual(expectedQuantity, item.Quantity);
         }
 
 
@@ -79,7 +77,14 @@ namespace InventorySystem.Domain.Entities.Tests
         public void UpdateQuantity_NegativeValue_ThrowsException()
         {
             // Arrange
-            InventoryItem item = new InventoryItem(0);
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
+            int quantity = 0;
+            DateTime lastUpdated = DateTime.Now;
+            int expectedQuantity = 0;
+
+            InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated, expectedQuantity);
 
             // Act & Assert
             Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(-1));
@@ -90,15 +95,20 @@ namespace InventorySystem.Domain.Entities.Tests
         public void UpdateQuantityTest()
         {
             // Arrange
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
             int initialQuantity = 0;
-            int updatedQuantity = 5;
-            InventoryItem item = new InventoryItem(initialQuantity);
+            DateTime lastUpdated = DateTime.Now;
+            int expectedQuantity = 5;
+
+            InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, initialQuantity, lastUpdated, 0);
 
             // Act
-            item.UpdateQuantity(updatedQuantity);
+            item.UpdateQuantity(expectedQuantity);
 
             // Assert
-            Assert.AreEqual(updatedQuantity, item.Quantity);
+            Assert.AreEqual(expectedQuantity, item.Quantity);
         }
 
         [TestMethod()]
@@ -106,12 +116,16 @@ namespace InventorySystem.Domain.Entities.Tests
         public void UpdateQuantityTest_ThrowException()
         {
             // Arrange
-            int initialQuantity = -1;
-            int updatedQuantity = -1;
-            InventoryItem item = new InventoryItem(initialQuantity);
+            int inventoryItemId = 1;
+            int productId = 10;
+            int locationId = 5;
+            int initialQuantity = 0; // Fixed: must be non-negative
+            DateTime lastUpdated = DateTime.Now;
+
+            InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, initialQuantity, lastUpdated, 0);
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(updatedQuantity));
+            Assert.ThrowsException<ArgumentException>(() => item.UpdateQuantity(-1));
         }
     }
 }
