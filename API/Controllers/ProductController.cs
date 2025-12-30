@@ -1,93 +1,91 @@
-﻿using ApplicationsLayer.Interfaces;              // ✅ Application layer dependency
-using InventorySystem.Domain.Entities;            // ⚠ Domain entity (explained below)
+﻿using ApplicationsLayer.Commands.ProductCommands;
+using ApplicationsLayer.DTO;
+using ApplicationsLayer.Handlers.ProductHandler;
+using ApplicationsLayer.Queries.ProductQuery;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    // -------------------------
+    // GET: api/products
+    // -------------------------
+    [HttpGet]
+    [ProducesResponseType(typeof(List<ProductDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<List<ProductDTO>>> GetAll(
+         GetAllProductsHandler handler,
+         CancellationToken ct)
     {
-        // ✅ Dependency inversion: controller depends on an interface from Application layer
-        private readonly IGenericRepository<Product> _repository;
+        var query = new GetAllProducts(); // Create the required query object
+        var products = await handler.Handle(query);
 
-        // ✅ Constructor injection via interface (IoC)
-        public ProductsController(IGenericRepository<Product> repository)
+        if (products.Count == 0)
+            return NotFound();
+
+        return Ok(products);
+    }
+
+    // -------------------------
+    // GET: api/products/{id}
+    // -------------------------
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ProductDTO>> GetById(
+      int id,
+      GetProductByIdHandler handler,
+      CancellationToken ct)
+    {
+        var query = new GetProductById { ProductId = id };
+        var product = await handler.Handle(query);
+
+        if (product is null)
+            return NotFound();
+
+        return Ok(product);
+    }
+
+    // -------------------------
+    // POST: api/products
+    // -------------------------
+    [HttpPost]
+    [ProducesResponseType(typeof(ProductDTO), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ProductDTO>> Create(
+    [FromBody] CreateProductCommand command,
+    CreateProductHandler handler,
+    GetProductByIdHandler getByIdHandler,
+    CancellationToken ct)
+    {
+        // Only check for Name, unless you add Sku to the command
+        if (string.IsNullOrWhiteSpace(command.Name))
+            return BadRequest("Name is required.");
+
+        try
         {
-            _repository = repository;
-        }
+            // Call without ct, since handler.Handle does not accept it
+            var createdId = await handler.Handle(command);
 
-        // -------------------------
-        // GET: api/products
-        // -------------------------
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAll()
-        {
-            // ✅ Async call to repository
-            var products = await _repository.GetAllAsync();
+            var productDto = await getByIdHandler.Handle(new GetProductById { ProductId = createdId });
 
-            // ✅ Proper null / empty check
-            if (products == null || products.Count == 0)
-            {
+            if (productDto == null)
                 return NotFound();
-            }
 
-            return Ok(products);
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = createdId },
+                productDto
+            );
         }
-
-        // -------------------------
-        // GET: api/products/{id}
-        // -------------------------
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Product>> GetById(int id)
+        catch (ArgumentOutOfRangeException ex)
         {
-            // ✅ Repository handles data access, controller only handles HTTP
-            var product = await _repository.GetByIdAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(product);
-        }
-
-        // -------------------------
-        // POST: api/products
-        // -------------------------
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Product>> Create([FromBody] Product product)
-        {
-            // ✅ Model validation handled by [ApiController]
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                // ✅ Await async call
-                await _repository.AddAsync(product);
-
-                // ✅ Correct RESTful Created response
-                return CreatedAtAction(
-                    nameof(GetById),
-                    new { id = product.ProductId },
-                    product
-                );
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                // ✅ Domain validation errors translated to HTTP 400
-                return BadRequest(ex.Message);
-            }
+            return BadRequest(ex.Message);
         }
     }
+}
 }

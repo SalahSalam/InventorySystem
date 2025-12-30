@@ -21,7 +21,7 @@ builder.Services.AddEndpointsApiExplorer(); // Adds support for minimal API endp
 builder.Services.AddSwaggerGen(); // Registers Swagger generator for API documentation
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("YourConnectionStringHere"));
+    options.UseSqlServer("\"Server=.;Database=InventorySystemDb;Trusted_Connection=True;TrustServerCertificate=True"));
 
 
 // Configures CORS to allow any origin, method, and header
