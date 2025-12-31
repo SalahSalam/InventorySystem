@@ -1,19 +1,32 @@
-using ApplicationsLayer; 
-using ApplicationsLayer.Interfaces; 
-using InfrastructureLayer; 
-using InfrastructureLayer.Persistence; 
-using InfrastructureLayer.Repositories; 
-using InventorySystem.Domain.Entities; 
-using Microsoft.AspNetCore.StaticFiles; 
-using Microsoft.EntityFrameworkCore; 
+using ApplicationsLayer;
+using ApplicationsLayer.Handlers.OrderHandler;
+using ApplicationsLayer.Handlers.ProductHandler;
+using ApplicationsLayer.Interfaces;
+using InfrastructureLayer;
+using InfrastructureLayer.Persistence;
+using InfrastructureLayer.Repositories;
+using InventorySystem.Domain.Entities;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args); // Creates a new web application builder
 
 // Add services to the container.
 builder.Services.AddControllers(); // Registers controllers for MVC/Web API
 
-// Registers the generic repository for InventoryItem with scoped lifetime
+// Register repositories for entity types
 builder.Services.AddScoped<IGenericRepository<InventoryItem>, GenericRepository<InventoryItem>>();
+builder.Services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+builder.Services.AddScoped<IGenericRepository<Order>, GenericRepository<Order>>();
+
+// Register handler classes
+builder.Services.AddScoped<CreateOrderHandler>();
+builder.Services.AddScoped<GetAllOrdersHandler>();
+builder.Services.AddScoped<GetOpenOrdersHandler>();
+builder.Services.AddScoped<CloseOrderHandler>();
+builder.Services.AddScoped<GetOrderByIdHandler>();
+builder.Services.AddScoped<CreateProductHandler>();
+builder.Services.AddScoped<GetProductByIdHandler>();
 
 // builder.Services.AddSingleton<OrderHistoryRepository>(new OrderHistoryRepository()); // Example for registering another repository (commented out)
 
@@ -21,8 +34,7 @@ builder.Services.AddEndpointsApiExplorer(); // Adds support for minimal API endp
 builder.Services.AddSwaggerGen(); // Registers Swagger generator for API documentation
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer("\"Server=.;Database=InventorySystemDb;Trusted_Connection=True;TrustServerCertificate=True"));
-
+    options.UseSqlServer("Server=.;Database=InventorySystemDb;Trusted_Connection=True;TrustServerCertificate=True"));
 
 // Configures CORS to allow any origin, method, and header
 builder.Services.AddCors(options =>
@@ -48,7 +60,6 @@ app.Use(async (context, next) =>
     }
     await next();
 });
-
 
 // Configure MIME type whitelisting for static files
 var provider = new FileExtensionContentTypeProvider();

@@ -1,83 +1,110 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApplicationsLayer.Commands.OrderCommands;
+using ApplicationsLayer.DTO;
+using ApplicationsLayer.Handlers.OrderHandler;
+using ApplicationsLayer.Queries.OrderQuery;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class OrdersController : ControllerBase
 {
-    public class OrderController : Controller
+    // ----------------------------------
+    // GET: api/orders
+    // ----------------------------------
+    [HttpGet]
+    [ProducesResponseType(typeof(List<OrderDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<List<OrderDTO>>> GetAll(
+        [FromServices] GetAllOrdersHandler handler,
+        CancellationToken ct)
     {
-        // GET: OrderController
-        public ActionResult Index()
-        {
-            return View();
-        }
+        var query = new GetAllOrders();
+        var orders = await handler.Handle(query);
 
-        // GET: OrderController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        if (orders.Count == 0)
+            return NotFound();
 
-        // GET: OrderController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        return Ok(orders);
+    }
 
-        // POST: OrderController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+    // ----------------------------------
+    // GET: api/orders/open
+    // ----------------------------------
+    [HttpGet("open")]
+    [ProducesResponseType(typeof(List<OrderDTO>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<List<OrderDTO>>> GetOpenOrders(
+        [FromServices] GetOpenOrdersHandler handler,
+        CancellationToken ct)
+    {
+        var query = new GetOpenOrders();
+        var orders = await handler.Handle(query);
 
-        // GET: OrderController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        if (orders.Count == 0)
+            return NotFound();
 
-        // POST: OrderController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        return Ok(orders);
+    }
 
-        // GET: OrderController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+    // ----------------------------------
+    // GET: api/orders/{id}
+    // ----------------------------------
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(OrderDTO), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<OrderDTO>> GetById(
+        int id,
+        [FromServices] GetOrderByIdHandler handler,
+        CancellationToken ct)
+    {
+        var query = new GetOrderById { OrderId = id };
+        var order = await handler.Handle(query);
 
-        // POST: OrderController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        if (order is null)
+            return NotFound();
+
+        return Ok(order);
+    }
+
+    // ----------------------------------
+    // POST: api/orders
+    // ----------------------------------
+    [HttpPost]
+    [ProducesResponseType(typeof(OrderDTO), StatusCodes.Status201Created)]
+    public async Task<ActionResult<OrderDTO>> CreateOrder(
+        [FromBody] CreateOrder command,
+        [FromServices] CreateOrderHandler createHandler,
+        [FromServices] GetOrderByIdHandler getByIdHandler,
+        CancellationToken ct)
+    {
+        var createdOrderId = await createHandler.Handle(command);
+
+        var order = await getByIdHandler.Handle(
+            new GetOrderById { OrderId = createdOrderId });
+
+        return CreatedAtAction(
+            nameof(GetById),
+            new { id = createdOrderId },
+            order
+        );
+    }
+
+    // ----------------------------------
+    // POST: api/orders/{id}/close
+    // ----------------------------------
+    [HttpPost("{id:int}/close")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> CloseOrder(
+        int id,
+        [FromServices] CloseOrderHandler handler,
+        CancellationToken ct)
+    {
+        var command = new CloseOrder { OrderId = id };
+        await handler.Handle(command);
+
+        return NoContent();
     }
 }
