@@ -58,8 +58,8 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ProductDTO>> Create(
     [FromBody] CreateProductCommand command,
-    CreateProductHandler handler,
-    GetProductByIdHandler getByIdHandler,
+    [FromServices] CreateProductHandler handler,
+    [FromServices] GetProductByIdHandler getByIdHandler,
     CancellationToken ct)
     {
         // Only check for Name, unless you add Sku to the command

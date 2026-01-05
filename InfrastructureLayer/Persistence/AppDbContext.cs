@@ -6,14 +6,11 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace InfrastructureLayer.Persistence
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) { }
-
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Location> Locations => Set<Location>();
         public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
@@ -27,5 +24,4 @@ namespace InfrastructureLayer.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
     }
-
 }
