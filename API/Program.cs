@@ -3,7 +3,6 @@ using ApplicationsLayer.Interfaces;
 using InfrastructureLayer; 
 using InfrastructureLayer.Persistence; 
 using InfrastructureLayer.Repositories; 
-using InventorySystem.Domain.Entities; 
 using Microsoft.AspNetCore.StaticFiles; 
 using Microsoft.EntityFrameworkCore; 
 
