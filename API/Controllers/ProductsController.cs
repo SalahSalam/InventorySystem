@@ -49,7 +49,7 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateDetails(
     int id,
-    [FromBody] UpdateProductDetailsRequest request,
+    [FromBody] UpdateProductDetailsRequestDto request,
     [FromServices] UpdateProductDetailsHandler handler)
     {
         var cmd = new UpdateProductDetailsCommand(

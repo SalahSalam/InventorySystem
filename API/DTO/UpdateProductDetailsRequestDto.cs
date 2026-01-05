@@ -1,6 +1,6 @@
 ﻿namespace API.DTO
 {
-    public class UpdateProductDetailsRequest
+    public class UpdateProductDetailsRequestDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = "";
