@@ -1,4 +1,5 @@
-﻿using ApplicationsLayer.Commands.OrderCommands;
+﻿using API.DTO;
+using ApplicationsLayer.Commands.OrderCommands;
 using ApplicationsLayer.Handlers.OrderHandler;
 using ApplicationsLayer.Queries.OrderQuery;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ namespace API.Controllers;
 [ApiController]
 [Route("api/orders")]
 public class OrdersController : ControllerBase
-
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -42,14 +42,18 @@ public class OrdersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Create(
-        [FromBody] CreateOrder cmd,
-        [FromServices] CreateOrderHandler handler)
+    [FromBody] CreateOrderRequestDto request,
+    [FromServices] CreateOrderHandler handler)
     {
-        Console.WriteLine("HIT: OrdersController.Create");
+        if (request.Lines == null || request.Lines.Count == 0)
+            return BadRequest("Order must contain at least one line.");
 
-        // Handler validerer lines + product existence :contentReference[oaicite:34]{index=34}
-        var newId = await handler.Handle(cmd);
-        return CreatedAtAction(nameof(GetById), new { orderId = newId }, new { orderId = newId });
+        var command = new CreateOrder(
+            request.Lines.Select(l => new CreateOrderLine(l.ProductId, l.Quantity))
+        );
+
+        var id = await handler.Handle(command);
+        return CreatedAtAction(nameof(GetById), new { orderId = id }, new { orderId = id });
     }
 
     [HttpPost("{orderId:int}/close")]

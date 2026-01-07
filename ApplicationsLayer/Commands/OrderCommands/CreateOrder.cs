@@ -9,7 +9,7 @@ namespace ApplicationsLayer.Commands.OrderCommands
 {
     public class CreateOrder
     {
-        public IReadOnlyList<CreateOrderLine> Lines { get; }
+        public IList<CreateOrderLine> Lines { get; set; }
 
         public CreateOrder(IEnumerable<CreateOrderLine> lines)
         {
@@ -22,8 +22,8 @@ namespace ApplicationsLayer.Commands.OrderCommands
     }
     public class CreateOrderLine
     {
-        public int ProductId { get; }
-        public int Quantity { get; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
         public CreateOrderLine(int productId, int quantity)
         {
             if (productId <= 0)
