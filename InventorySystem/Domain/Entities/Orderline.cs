@@ -17,17 +17,8 @@ namespace InventorySystem.Domain.Entities
 
         public OrderLine(int productId, int quantity)
         {
-            if (quantity <= 0)
-                throw new ArgumentException("Quantity must be greater than zero.");
-
             _productId = productId;
             _quantity = quantity;
         }
-
-        //// orderId is set internally
-        //internal void SetOrderId(int orderId)
-        //{
-        //    _orderId = orderId;
-        //}
     }
 }

@@ -22,17 +22,6 @@ namespace InfrastructureLayer.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-
-            // Configure Order entity to use a factory for instantiation
-            modelBuilder.Entity<Order>(entity =>
-            {
-                entity.HasKey(o => o.OrderId);
-
-                // Use a custom constructor for the Order entity
-                entity.HasData(new Order(new List<(int productId, int quantity)>()));
-            });
-
-            // Add other entity configurations as needed
         }
 
     }

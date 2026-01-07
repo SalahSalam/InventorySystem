@@ -21,10 +21,15 @@ namespace InfrastructureLayer.Persistence.Configurations
             builder.Property(o => o.CreatedAt)
                    .IsRequired();
 
-            builder.HasMany(o => o.Lines)
-                   .WithOne()
-                   .HasForeignKey("OrderId")
-                   .IsRequired();
+            builder.Ignore(o => o.Lines);
+
+            builder.HasMany<OrderLine>("_lines")
+               .WithOne()
+               .HasForeignKey("OrderId")
+               .IsRequired();
+
+            builder.Navigation("_lines")
+                   .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 

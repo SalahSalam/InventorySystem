@@ -9,6 +9,7 @@ namespace API.Controllers;
 [ApiController]
 [Route("api/products")]
 public class ProductsController : ControllerBase
+
 {
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -33,14 +34,11 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create(
-        [FromBody] CreateProductCommand cmd,
-        [FromServices] CreateProductHandler handler)
+    [FromBody] CreateProductCommand cmd,
+    [FromServices] CreateProductHandler handler)
     {
-        // Command object kommer fra Application layer (ingen API-logic)
-        var newId = await handler.Handle(cmd);
-
-        // REST: returner location til resource
-        return CreatedAtAction(nameof(GetById), new { id = newId }, new { id = newId });
+        var id = await handler.Handle(cmd);
+        return CreatedAtAction(nameof(GetById), new { id }, null);
     }
 
     [HttpPut("{id:int}")]

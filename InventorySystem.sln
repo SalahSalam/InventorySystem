@@ -8,8 +8,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventorySystemTests", "InventorySystemTests\InventorySystemTests.csproj", "{CEF5BA8C-CE88-426F-937F-C4877A3A3CDD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationsLayer", "ApplicationsLayer\ApplicationsLayer.csproj", "{6448F21A-BED1-41C8-8205-DE5DC04AF73C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{876BB4EE-CD0B-462D-BDD1-7209BEA37131} = {876BB4EE-CD0B-462D-BDD1-7209BEA37131}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureLayer", "InfrastructureLayer\InfrastructureLayer.csproj", "{A26E4BAE-0920-4034-965A-3073D6015411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureLayer", "InfrastructureLayer\InfrastructureLayer.csproj", "{A26E4BAE-0920-4034-965A-3073D6015411}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6448F21A-BED1-41C8-8205-DE5DC04AF73C} = {6448F21A-BED1-41C8-8205-DE5DC04AF73C}
 		{876BB4EE-CD0B-462D-BDD1-7209BEA37131} = {876BB4EE-CD0B-462D-BDD1-7209BEA37131}

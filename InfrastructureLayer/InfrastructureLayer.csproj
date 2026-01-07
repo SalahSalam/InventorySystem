@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationsLayer\ApplicationsLayer.csproj" />
+    <ProjectReference Include="..\InventorySystem\InventorySystem.csproj" />
   </ItemGroup>
 
 </Project>
