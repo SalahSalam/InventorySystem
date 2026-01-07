@@ -5,7 +5,11 @@ using ApplicationsLayer.Handlers.LocationHandler;
 using ApplicationsLayer.Handlers.OrderHandler;
 using ApplicationsLayer.Handlers.ProductHandler;
 using ApplicationsLayer.Handlers.ProductMovementHandler;
+using ApplicationsLayer.Interfaces;
+using InfrastructureLayer.Persistence;
+using InfrastructureLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +44,15 @@ builder.Services.AddScoped<GetProductMovementsByDateRangeHandler>();
 
 builder.Services.AddScoped<GetAllLocationsHandler>();
 builder.Services.AddScoped<CreateLocationHandler>();
+
+
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Infrastructure registrations (DbContext + IGenericRepository<T>) sker i jeres Infrastructure-projekt,
 // fx builder.Services.AddInfrastructure(builder.Configuration);
@@ -91,9 +104,6 @@ app.Run();
 //builder.Services.AddEndpointsApiExplorer(); // Adds support for minimal API endpoint discovery (for Swagger)
 //builder.Services.AddSwaggerGen(); // Registers Swagger generator for API documentation
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlServer("Server=.;Database=InventorySystemDb;Trusted_Connection=True;TrustServerCertificate=True"));
-
 //// Configures CORS to allow any origin, method, and header
 //builder.Services.AddCors(options =>
 //{
@@ -104,7 +114,6 @@ app.Run();
 //        });
 //});
 
-//var app = builder.Build(); // Builds the web application
 
 //// Middleware to only allow GET and POST HTTP methods; returns 405 for others
 //app.Use(async (context, next) =>

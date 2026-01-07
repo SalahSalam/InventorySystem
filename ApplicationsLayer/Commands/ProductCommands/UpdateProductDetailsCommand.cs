@@ -15,8 +15,7 @@ namespace ApplicationsLayer.Commands.ProductCommands
         public decimal Price { get; }
         public int MinimumStock { get; }
 
-        public UpdateProductDetailsCommand(int productId, string name, string? description,
-                                            string category, decimal price, int minimumStock)
+        public UpdateProductDetailsCommand(int productId, string name, string? description, string category, decimal price, int minimumStock)
         {
             ProductId = productId;
             Name = name;
