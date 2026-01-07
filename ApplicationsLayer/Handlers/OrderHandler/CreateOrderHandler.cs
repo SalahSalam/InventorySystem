@@ -29,7 +29,7 @@ namespace ApplicationsLayer.Handlers.OrderHandler
             if (x.Lines == null || x.Lines.Count == 0)
                 throw new DomainValidationException("Order must contain at least one line.");
 
-            var lineData = new List<(int productId, int quantity)>();
+            var orderLines = new List<OrderLine>();
 
             foreach (var line in x.Lines)
             {
@@ -37,13 +37,16 @@ namespace ApplicationsLayer.Handlers.OrderHandler
                 if (product == null)
                     throw new NotFoundException($"Product {line.ProductId} not found.");
 
-                lineData.Add((line.ProductId, line.Quantity));
+                orderLines.Add(new OrderLine(line.ProductId, line.Quantity));
             }
 
-            var order = new Order(lineData);
+            var order = new Order(orderLines);
+
             await _orderRepo.AddAsync(order);
+
             return order.OrderId;
         }
+
     }
 }
 

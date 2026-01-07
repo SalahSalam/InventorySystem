@@ -11,28 +11,17 @@ namespace InfrastructureLayer.Persistence
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<Product> Products => Set<Product>();
-        public DbSet<Location> Locations => Set<Location>();
-        public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
-        public DbSet<ProductMovement> ProductMovements => Set<ProductMovement>();
-        public DbSet<Order> Orders => Set<Order>();
-        public DbSet<OrderLine> OrderLines => Set<OrderLine>();
-        public DbSet<User> Users => Set<User>();
+        public DbSet<Product> Product => Set<Product>();
+        public DbSet<Location> Location => Set<Location>();
+        public DbSet<InventoryItem> InventoryItem => Set<InventoryItem>();
+        public DbSet<ProductMovement> ProductMovement => Set<ProductMovement>();
+        public DbSet<Order> Order => Set<Order>();
+        public DbSet<OrderLine> OrderLine => Set<OrderLine>();
+        public DbSet<User> User => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-
-            // Configure Order entity to use a factory for instantiation
-            modelBuilder.Entity<Order>(entity =>
-            {
-                entity.HasKey(o => o.OrderId);
-
-                // Use a custom constructor for the Order entity
-                entity.HasData(new Order(new List<(int productId, int quantity)>()));
-            });
-
-            // Add other entity configurations as needed
         }
 
     }
