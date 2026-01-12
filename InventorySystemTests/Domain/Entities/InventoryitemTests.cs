@@ -23,7 +23,7 @@ namespace InventorySystem.Domain.Entities.Tests
             DateTime lastUpdated = DateTime.Now;
 
             // Act
-            var item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated); // 0 for expectedQuantity
+            var item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated);
 
             // Assert
             Assert.AreEqual(inventoryItemId, item.InventoryItemId);
@@ -52,28 +52,8 @@ namespace InventorySystem.Domain.Entities.Tests
             Assert.AreEqual(quantity, item.Quantity);
         }
 
-        //[TestMethod()]
-        //// Verifies that the constructor sets the quantity property to the expected value.
-        //public void InventoryitemTest_Notcorrect()
-        //{
-        //    // Arrange
-        //    int inventoryItemId = 1;
-        //    int productId = 10;
-        //    int locationId = 5;
-        //    int quantity = 0;
-        //    DateTime lastUpdated = DateTime.Now;
-        //    //int expectedQuantity = 0;
-
-        //    // Act
-        //    InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated, expectedQuantity);
-
-        //    // Assert
-        //    Assert.AreEqual(expectedQuantity, item.Quantity);
-        //}
-
 
         [TestMethod()]
-        // Ensures UpdateQuantity throws an ArgumentException when a negative value is provided.
         public void UpdateQuantity_NegativeValue_ThrowsException()
         {
             // Arrange
@@ -82,7 +62,6 @@ namespace InventorySystem.Domain.Entities.Tests
             int locationId = 5;
             int quantity = 0;
             DateTime lastUpdated = DateTime.Now;
-            //int expectedQuantity = 0;
 
             InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, quantity, lastUpdated);
 
@@ -112,14 +91,14 @@ namespace InventorySystem.Domain.Entities.Tests
         }
 
         [TestMethod()]
-        // Ensures UpdateQuantity throws an ArgumentException when a negative value is provided (redundant test).
+        // Ensures UpdateQuantity throws an ArgumentException when a negative value is provided.
         public void UpdateQuantityTest_ThrowException()
         {
             // Arrange
             int inventoryItemId = 1;
             int productId = 10;
             int locationId = 5;
-            int initialQuantity = 0; // Fixed: must be non-negative
+            int initialQuantity = 0;
             DateTime lastUpdated = DateTime.Now;
 
             InventoryItem item = new InventoryItem(inventoryItemId, productId, locationId, initialQuantity, lastUpdated);

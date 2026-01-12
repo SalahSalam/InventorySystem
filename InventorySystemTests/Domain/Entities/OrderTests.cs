@@ -57,7 +57,7 @@ namespace InventorySystem.Domain.Entities.Tests
         public void CloseOrder_WhenOrderIsNotOpen_ThrowsInvalidOperationException()
         {
             var order = new Order(new[] { (1, 2) });
-            order.CloseOrder(); // Now status is Closed
+            order.CloseOrder(); 
 
             var ex = Assert.ThrowsException<InvalidOperationException>(() => order.CloseOrder());
             Assert.AreEqual("Only open orders can be closed", ex.Message);

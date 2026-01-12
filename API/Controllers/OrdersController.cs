@@ -55,6 +55,20 @@ public class OrdersController : ControllerBase
         var id = await handler.Handle(command);
         return CreatedAtAction(nameof(GetById), new { orderId = id }, new { orderId = id });
     }
+    //[HttpPost]
+    //[ProducesResponseType(StatusCodes.Status201Created)]
+    //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+    //[ProducesResponseType(StatusCodes.Status404NotFound)]
+    //public async Task<IActionResult> Create(
+    //    [FromBody] CreateOrder cmd,
+    //    [FromServices] CreateOrderHandler handler)
+    //{
+    //    Console.WriteLine("HIT: OrdersController.Create");
+
+    //    // Handler validerer lines + product existence :contentReference[oaicite:34]{index=34}
+    //    var newId = await handler.Handle(cmd);
+    //    return CreatedAtAction(nameof(GetById), new { orderId = newId }, new { orderId = newId });
+    //}
 
     [HttpPost("{orderId:int}/close")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
