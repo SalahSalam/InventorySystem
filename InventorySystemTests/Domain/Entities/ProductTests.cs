@@ -18,7 +18,7 @@ namespace InventorySystem.Domain.Entities.Tests
 
         public void SetMinimumStock_ValidValue_SetsMinimumStock()
         {
-            var product = new Product(1, "Test Product", "This is a test product.", "Test Category", 9.99m, 15);
+            var product = new Product("Test Product", "This is a test product.", "Test Category", 9.99m, 15);
             product.SetMinimumStock(10);
             Assert.IsTrue(product.IsBelowMinimum(9));
             Assert.IsFalse(product.IsBelowMinimum(10));
@@ -28,7 +28,7 @@ namespace InventorySystem.Domain.Entities.Tests
         [TestMethod]
         public void IsBelowMinimum_CurrentStockBelowMinimum_ReturnsTrue()
         {
-            var product = new Product(1, "Test Product", "This is a test product.", "Test Category", 9.99m, 15);
+            var product = new Product("Test Product", "This is a test product.", "Test Category", 9.99m, 15);
             product.SetMinimumStock(15);
             Assert.IsTrue(product.IsBelowMinimum(3));
         }
@@ -37,7 +37,7 @@ namespace InventorySystem.Domain.Entities.Tests
         [TestMethod]
         public void IsBelowMinimum_CurrentStockEqualOrAboveMinimum_ReturnsFalse()
         {
-            var product = new Product(1, "Test Product", "This is a test product.", "Test Category", 9.99m, 15);
+            var product = new Product("Test Product", "This is a test product.", "Test Category", 9.99m, 15);
             product.SetMinimumStock(5);
             Assert.IsFalse(product.IsBelowMinimum(5));
             Assert.IsFalse(product.IsBelowMinimum(6));
@@ -47,13 +47,13 @@ namespace InventorySystem.Domain.Entities.Tests
         [TestMethod]
         public void SetMinimumStock_NegativeValue_ThrowsException()
         {
-            var product = new Product(1, "Test Product", "This is a test product.", "Test Category", 9.99m, 0);
+            var product = new Product("Test Product", "This is a test product.", "Test Category", 9.99m, 0);
             Assert.ThrowsException<ArgumentException>(() => product.SetMinimumStock(-1));
         }
         [TestMethod]
         public void SetMinimumStock_EqualZerp_ThrowsException()
         {
-            var product = new Product(1, "Test Product", "This is a test product.", "Test Category", 9.99m, 0);
+            var product = new Product("Test Product", "This is a test product.", "Test Category", 9.99m, 0);
             Assert.ThrowsException<ArgumentException>(() => product.SetMinimumStock(0));
         }
     }

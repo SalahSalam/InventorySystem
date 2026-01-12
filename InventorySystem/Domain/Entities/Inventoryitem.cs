@@ -15,13 +15,13 @@ namespace InventorySystem.Domain.Entities
         public int Quantity { get; private set; }
         public DateTime LastUpdated { get; private set; }
 
-        public InventoryItem(int inventoryItemId, int productId, int locationId, int quantity, DateTime lastupdated, int expectedQuantity)
-        {
+        public InventoryItem(int inventoryItemId, int productId, int locationId, int quantity, DateTime LastUpdated)
+        { 
             InventoryItemId = inventoryItemId;
             ProductId = productId;
             LocationId = locationId;
             Quantity = quantity;
-            LastUpdated = lastupdated;
+            LastUpdated = LastUpdated;
             if (quantity < 0)
             {
                 throw new ArgumentException("Quantity cannot be negative.");

@@ -8,11 +8,21 @@ namespace ApplicationsLayer.Commands.ProductCommands
 {
     public class UpdateProductDetailsCommand
     {
-        public int Productid { get; }
-        public string Name { get; set; } = "";
-        public string? Description { get; set; }
-        public string Category { get; set; } = "";
-        public decimal Price { get; set; }
-        public int Minimumstock {  get; set; }
+        public int ProductId { get; }
+        public string Name { get; }
+        public string? Description { get; }
+        public string Category { get; }
+        public decimal Price { get; }
+        public int MinimumStock { get; }
+
+        public UpdateProductDetailsCommand(int productId, string name, string? description, string category, decimal price, int minimumStock)
+        {
+            ProductId = productId;
+            Name = name;
+            Description = description;
+            Category = category;
+            Price = price;
+            MinimumStock = minimumStock;
+        }
     }
 }

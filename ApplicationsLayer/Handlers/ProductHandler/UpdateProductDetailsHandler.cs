@@ -21,9 +21,9 @@ namespace ApplicationsLayer.Handlers.ProductHandler
 
         public async Task Handle(UpdateProductDetailsCommand x)
         {
-            var product = await _productRepo.GetByIdAsync(x.Productid);
+            var product = await _productRepo.GetByIdAsync(x.ProductId);
             if (product == null)
-                throw new ArgumentException($"Product with id {x.Productid} not found.");
+                throw new ArgumentException($"Product with id {x.ProductId} not found.");
 
             product.UpdateDetails(x.Name, x.Description, x.Category, x.Price);
 

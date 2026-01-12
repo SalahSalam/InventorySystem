@@ -16,6 +16,7 @@ namespace InfrastructureLayer.Persistence.Configurations
             builder.HasKey(p => p.ProductId);
 
             builder.Property(p => p.Name).IsRequired();
+            builder.Property(p => p.Description).IsRequired();
             builder.Property(p => p.Category).IsRequired();
             builder.Property(p => p.Price).HasPrecision(10, 2);
             builder.Property(p => p.Minimumstock).IsRequired();

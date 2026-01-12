@@ -15,19 +15,16 @@ namespace InventorySystem.Domain.Entities
         public OrderStatus Status { get; private set; }
         public IReadOnlyCollection<OrderLine> Lines => _lines.AsReadOnly();
 
-
-        public Order(IEnumerable<(int productId, int quantity)> lines)
+        private Order() { } // For EF core to materialze
+        public Order(IEnumerable<OrderLine> lines)
         {
-            if (!lines.Any())
+            if (lines == null || !lines.Any())
                 throw new ArgumentException("An order must contain at least one order line.");
 
             CreatedAt = DateTime.UtcNow;
             Status = OrderStatus.Open;
 
-            foreach (var (productId, quantity) in lines)
-            {
-                _lines.Add(new OrderLine(productId, quantity));
-            }
+            _lines.AddRange(lines);
         }
         public enum OrderStatus
         {
@@ -42,6 +39,14 @@ namespace InventorySystem.Domain.Entities
                 throw new InvalidOperationException("Only open orders can be closed");
             }
             Status = OrderStatus.Closed;
+        }
+        public void AddOrderLine(int productId, int quantity)
+        {
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be greater than zero.");
+            }
+            _lines.Add(new OrderLine(productId, quantity));
         }
     }
 }

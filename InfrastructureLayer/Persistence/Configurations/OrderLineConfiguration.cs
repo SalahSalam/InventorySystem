@@ -13,16 +13,23 @@ namespace InfrastructureLayer.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderLine> builder)
         {
-            builder.HasKey("_orderId", "_productId");
+            // Composite key: shadow OrderId + domain ProductId
+            builder.HasKey("OrderId", nameof(OrderLine.ProductId));
 
-            builder.Property<int>("_orderId")
-                   .HasColumnName("OrderId");
+            // Shadow property (FK til Order)
+            builder.Property<int>("OrderId")
+                   .IsRequired();
 
-            builder.Property<int>("_productId")
-                   .HasColumnName("ProductId");
+            builder.Property(ol => ol.ProductId)
+                   .IsRequired();
 
-            builder.Property<int>("_quantity")
-                   .HasColumnName("Quantity")
+            builder.Property(ol => ol.Quantity)
+                   .IsRequired();
+
+            // Relation til Order via backing field
+            builder.HasOne<Order>()
+                   .WithMany("_lines")
+                   .HasForeignKey("OrderId")
                    .IsRequired();
         }
     }
