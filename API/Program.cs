@@ -53,7 +53,19 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.EnableSensitiveDataLogging();
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+app.UseCors("AllowAll");
+app.MapControllers();
 
 // Global exception mapping ? controllers kan være “tynde”
 app.UseExceptionHandler(handlerApp =>
