@@ -27,7 +27,7 @@ namespace ApplicationsLayer.Handlers.ProductHandler
             {
                 ProductId = p.ProductId,
                 Name = p.Name,
-                Description = p.Description,
+                Description = p.Description ?? "",
                 Category = p.Category ?? "",
                 Price = p.Price,
                 Minimumstock = p.Minimumstock
